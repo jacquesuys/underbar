@@ -94,12 +94,11 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var arr = [];
-    _.each(array, function(item, index){
-      if (_.indexOf(array, index) > -1) arr.push(index);
+    _.each(array, function(item) {
+      if (!_.contains(arr, item)) arr.push(item);
     });
     return arr;
   };
-
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
