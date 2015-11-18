@@ -50,10 +50,10 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     if(Array.isArray(collection))
-      for(var index = 0; index <= collection.length - 1; index += 1)
+      for(var index = 0; index < collection.length; index++)
         iterator(collection[index], index, collection);
     else if(typeof collection === 'object' && collection !== null)
-      for(var key in colllection)
+      for(var key in collection)
         iterator(collection[key], key, collection);
   };
 
@@ -78,8 +78,9 @@
   _.filter = function(collection, test) {
     var arr = [];
     _.each(collection, function(index) {
-      if(test(collection[index]))
+      if(test(collection[index])){
         arr.push(collection[index]);
+      }
     });
     return arr;
   };
