@@ -155,7 +155,7 @@
       });
       return accumulator;
     } else {
-      return _.reduce(collection.slice(1), iterator, collection[0]);
+      return _.reduce(collection.slice(1), iterator, _.first(collection));
     }
   };
 
