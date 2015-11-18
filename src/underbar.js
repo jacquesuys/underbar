@@ -86,7 +86,7 @@
   _.reject = function(collection, test) {
     var arr = [];
     _.each(collection, function(index) {
-      if(!test(collection[index])) arr.push(collection[index]);
+      if(test(index)) arr.push(index);
     });
     return arr;
   };
