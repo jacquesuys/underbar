@@ -38,8 +38,7 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(n > array.length)
-      return array;
+    if(n > array.length) return array;
     return n === undefined ? array[array.length -1] : array.slice(array.length - n);
   };
 
@@ -78,7 +77,7 @@
   _.filter = function(collection, test) {
     var arr = [];
     _.each(collection, function(index) {
-      if(test(collection[index])) arr.push(collection[index]);
+      if(test(index)) arr.push(index);
     });
     return arr;
   };
@@ -94,6 +93,7 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+
   };
 
 
@@ -145,6 +145,10 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    _.each(collection, function(item){
+      accumulator = iterator(accumulator || 0, item);
+    });
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
