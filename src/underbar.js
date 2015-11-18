@@ -38,7 +38,7 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(n > array.length) return array;
+    if (n > array.length) return array;
     return n === undefined ? array[array.length -1] : array.slice(array.length - n);
   };
 
@@ -48,10 +48,10 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
-    if(Array.isArray(collection))
+    if (Array.isArray(collection))
       for(var index = 0; index < collection.length; index++)
         iterator(collection[index], index, collection);
-    else if(typeof collection === 'object' && collection !== null)
+    else if (typeof collection === 'object' && collection !== null)
       for(var key in collection)
         iterator(collection[key], key, collection);
   };
@@ -77,7 +77,7 @@
   _.filter = function(collection, test) {
     var arr = [];
     _.each(collection, function(index) {
-      if(test(index)) arr.push(index);
+      if (test(index)) arr.push(index);
     });
     return arr;
   };
@@ -86,7 +86,7 @@
   _.reject = function(collection, test) {
     var arr = [];
     _.each(collection, function(index) {
-      if(!test(index)) arr.push(index);
+      if (!test(index)) arr.push(index);
     });
     return arr;
   };
@@ -95,7 +95,7 @@
   _.uniq = function(array) {
     var arr = [];
     _.each(array, function(index, item){
-      if(_.indexOf(array, item) > -1) arr.push(item);
+      if (_.indexOf(array, item) > -1) arr.push(item);
     });
     return arr;
   };
@@ -149,10 +149,14 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    _.each(collection, function(item){
-      accumulator = iterator(accumulator || 0, item);
-    });
-    return accumulator;
+    if (accumulator !== undefined) {
+      _.each(collection, function(item){
+        accumulator = iterator(accumulator, item);
+      });
+      return accumulator;
+    } else {
+      return _.reduce(collection.slice(1), iterator, collection[0]);
+    }
   };
 
   // Determine if the array or object contains a given value (using `===`).
