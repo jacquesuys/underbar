@@ -49,10 +49,10 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     if (Array.isArray(collection))
-      for(var index = 0; index < collection.length; index++)
+      for (var index = 0; index < collection.length; index++)
         iterator(collection[index], index, collection);
     else if (typeof collection === 'object' && collection !== null)
-      for(var key in collection)
+      for (var key in collection)
         iterator(collection[key], key, collection);
   };
 
@@ -122,7 +122,7 @@
     // TIP: map is really handy when you want to transform an array of
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
-    return _.map(collection, function(item){
+    return _.map(collection, function(item) {
       return item[key];
     });
   };
@@ -153,7 +153,7 @@
       collection = collection.slice(1);
     }
     
-    _.each(collection, function(item){
+    _.each(collection, function(item) {
       accumulator = iterator(accumulator, item);
     });
 
@@ -177,7 +177,7 @@
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     iterator = iterator || Boolean;
-    return _.reduce(collection, function(previous, item){
+    return _.reduce(collection, function(previous, item) {
       return !!iterator(item) && previous;
     }, true);
   };
@@ -187,7 +187,7 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     iterator = iterator || Boolean;
-    return ! _.every(collection, function(item){
+    return !_.every(collection, function(item) {
       return !iterator(item);
     });
   };
@@ -212,6 +212,15 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    if (arguments.length < 2 || obj === null)
+      return obj;
+
+    for (var i = 1; i < arguments.length; i++)
+      _.each(arguments[i], function(value, key) {
+        obj[key] = value;
+      });
+
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
