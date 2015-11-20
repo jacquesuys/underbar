@@ -33,6 +33,7 @@
   // return just the first element.
   _.first = function(array, n) {
     return n === undefined ? array[0] : array.slice(0, n);
+    // array.shift() ?
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
@@ -40,6 +41,7 @@
   _.last = function(array, n) {
     if (n > array.length) return array;
     return n === undefined ? array[array.length -1] : array.slice(array.length - n);
+    // array.pop() ?
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -219,6 +221,7 @@
       });
 
     return obj;
+    // will have to see if we can bring in reduce, might have to relook reduce
   };
 
   // Like extend, but doesn't ever overwrite a key that already
@@ -231,6 +234,7 @@
       });
 
     return obj;
+    // will have to see if we can bring in reduce, might have to relook reduce
   };
 
 
