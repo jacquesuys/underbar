@@ -227,7 +227,7 @@
 
     for (var i = 1; i < arguments.length; i++)
       _.each(arguments[i], function(value, key) {
-        if (obj[key] === undefined) obj[key] = value;
+        if (!obj.hasOwnProperty(key)) obj[key] = value;
       });
 
     return obj;
