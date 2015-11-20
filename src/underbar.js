@@ -177,8 +177,8 @@
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     iterator = iterator || Boolean;
-    return _.reduce(collection, function(truthy, item){
-      return !!iterator(item) && truthy;
+    return _.reduce(collection, function(previous, item){
+      return !!iterator(item) && previous;
     }, true);
   };
 
@@ -186,6 +186,10 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    iterator = iterator || Boolean;
+    return ! _.every(collection, function(item){
+      return !iterator(item);
+    });
   };
 
 
