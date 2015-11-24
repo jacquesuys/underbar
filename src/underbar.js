@@ -33,7 +33,6 @@
   // return just the first element.
   _.first = function(array, n) {
     return n === undefined ? array[0] : array.slice(0, n);
-    // array.shift() ?
   };
 
   // Like first, but for the last elements. If n is undefined, return just the
@@ -41,7 +40,6 @@
   _.last = function(array, n) {
     if (n > array.length) return array;
     return n === undefined ? array[array.length -1] : array.slice(array.length - n);
-    // array.pop() ?
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -278,6 +276,8 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+
+    // closures!
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -287,6 +287,11 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments, 2);
+
+    setTimeout(function() { 
+      return func.apply(this, args);
+    }, wait);
   };
 
 
@@ -301,6 +306,13 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var clone = array.slice();
+    _.each(clone, function(item, index) {
+      var random = Math.floor(Math.random() * (index + 1));
+      if (random != index) clone[index] = clone[random];
+      clone[random] = array[index];
+    });
+    return clone;
   };
 
 
