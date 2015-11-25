@@ -213,10 +213,11 @@
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
 
-    for (var i = 1; i < arguments.length; i++)
-      _.each(arguments[i], function(value, key) {
+    _.each(arguments, function(item) {
+      _.each(item, function(value, key) {
         obj[key] = value;
       });
+    });  
 
     return obj;
     // will have to see if we can bring in reduce, might have to relook reduce
@@ -226,10 +227,11 @@
   // exists in obj
   _.defaults = function(obj) {
 
-    for (var i = 1; i < arguments.length; i++)
-      _.each(arguments[i], function(value, key) {
+    _.each(arguments, function(item) {
+      _.each(item, function(value, key) {
         if (!obj.hasOwnProperty(key)) obj[key] = value;
       });
+    });
 
     return obj;
     // will have to see if we can bring in reduce, might have to relook reduce
@@ -308,6 +310,7 @@
   _.shuffle = function(array) {
     var clone = array.slice();
     _.each(clone, function(item, index) {
+      // Fisher-Yates shuffle
       var random = Math.floor(Math.random() * (index + 1));
       if (random != index) clone[index] = clone[random];
       clone[random] = array[index];
